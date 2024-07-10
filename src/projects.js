@@ -1,7 +1,12 @@
  export class Project {
-    constructor(name){
+    constructor(name,id){
         this.name = name;
         this.tasks = []
+        this.id = id
+    }
+
+    getId(id){
+        return id
     }
     addTaskToProject(task){
         if(!this.tasks.find(tsk => tsk.name === task.name)){
