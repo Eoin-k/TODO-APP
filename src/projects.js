@@ -1,3 +1,5 @@
+import { renderTasks } from "./rendering";
+
  export class Project {
     constructor(name,id){
         this.name = name;
@@ -19,5 +21,6 @@
     removeTask(task){
        let findTask = this.tasks.findIndex(tsk =>tsk.title === task)
         this.tasks.splice(findTask,1)
+
     }
 }
