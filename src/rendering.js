@@ -1,24 +1,24 @@
-import { saveToLocal } from "./localStorage";
 import { currentId, projectsArray } from "./projectStorage";
+import { saveToLocal, getFromLocal} from "./localStorage";
 
+console.log(projectsArray)
  export const renderProjectList = (projectsArray) => {
-    console.log(projectsArray)
     const list = document.querySelector(".project-list-wrapper")
     const newItem = document.createElement("li");
     newItem.addEventListener("click", (e) => {
-        currentId = e.target.id;
-    //    console.log(currentId)
-       renderTasks(currentId);
+         currentId = e.target.id;
+           renderTasks(currentId);
        saveToLocal("ID",currentId)
     },{capture: true})
     projectsArray.forEach(project => {
         newItem.innerHTML = `<span id="${project.id}" class="project-item">${project.name}</span>`
         })
         list.append(newItem)
+        // console.log(currentId)
         renderTasks(currentId);
     }
 
- export const renderTasks = (currentId) => {
+ export function renderTasks(currentId) {
     const currentProject = projectsArray[currentId]
     const taskList = document.getElementById("tasklist")
     taskList.innerHTML = ""
@@ -40,7 +40,5 @@ import { currentId, projectsArray } from "./projectStorage";
         </div>`
         taskList.append(taskItem)
     })
-    
-   
 }
-
+ renderTasks(currentId)

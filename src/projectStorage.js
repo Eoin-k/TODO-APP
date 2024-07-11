@@ -1,25 +1,25 @@
 import  {Project}  from "./projects";
 import { Task } from "./task";
+import { getFromLocal, saveToLocal} from "./localStorage"
 import { renderProjectList,renderTasks } from "./rendering";
-import { getFromLocal,saveToLocal} from "./localStorage"
-export let projectsArray = getFromLocal("Projects")
-export let projectId = 1
-export let currentId = 0
-//  console.log(projectsArray)
+let projectId = 0
+let currentId = 0
+let projectsArray = []
+console.log(currentId + " MEG");
 
 const removeBtn = document.querySelectorAll(".remove-btn");
-
-
 const projectName = document.getElementById("project-name")
 export function storeProjects() {
     let projectname = projectName.value
+    console.log(projectname)
+    console.log(projectsArray)
     if(!projectsArray.find(storedProjects => storedProjects.name === projectname)){
     console.log(projectname + "LL")
     let newProject = new Project(projectname,projectId)
     projectsArray.push(newProject);
     console.log("Current Project Id = " + projectId);
     saveToLocal("Projects",projectsArray);
-     saveToLocal("ID",currentId)
+    saveToLocal("ID",currentId)
     renderProjectList(projectsArray)
     projectId++
     currentId = projectId
@@ -49,3 +49,5 @@ export const addTaskToProject = () => {
 export const removeTask = (task) => {
 console.log(task + " lalalal")
 }
+
+export {projectId, currentId}
