@@ -1,15 +1,22 @@
 import { projectsArray } from "./projectStorage";
 
 export const saveToLocal = (key,value) => {
-     value = JSON.stringify(value)
-    localStorage.setItem(key,value)
+     const stringValue = JSON.stringify(value)
+    localStorage.setItem(key,stringValue)
 }
 
 export const getFromLocal = (key) => {
-    if(localStorage.getItem(key) === null){
+    const storedValue = localStorage.getItem(key)
+    if(storedValue === null){
+        return [];
+    }
+    try {
+    const parsedValue = JSON.parse(storedValue)
+    console.log("Parsed Value:",parsedValue)
+    console.log("Type of parsed value:", typeof parsedValue)
+     return parsedValue
+    } catch (error) {
+        console.error('Error Parsing JSON',error)
         return []
     }
-   let newArray= localStorage.getItem(key)
-    let finalArray = JSON.parse(newArray)
-    return finalArray
-    }
+}

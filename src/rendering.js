@@ -4,17 +4,19 @@ import { currentId, projectsArray } from "./projectStorage";
  export const renderProjectList = (projectsArray) => {
     console.log(projectsArray)
     const list = document.querySelector(".project-list-wrapper")
-    const newItem = document.createElement("li");
-    newItem.addEventListener("click", (e) => {
-        currentId = e.target.id;
-    //    console.log(currentId)
-       renderTasks(currentId);
-       saveToLocal("ID",currentId)
-    },{capture: true})
+    console.log("Banana", projectsArray)
+    list.innerHTML = ""
     projectsArray.forEach(project => {
-        newItem.innerHTML = `<span id="${project.id}" class="project-item">${project.name}</span>`
+        list.innerHTML += `<li class="project-tab"><span id="${project.id}" class="project-item">${project.name}</span></li>`
         })
-        list.append(newItem)
+        const newItem = document.querySelectorAll(".project-tab");
+        newItem.forEach(item => { item.addEventListener("click", (e) => {
+            currentId = e.target.id;
+            console.log(currentId)
+           renderTasks(currentId);
+           saveToLocal("ID",currentId)
+        },{capture: true})})
+        
         renderTasks(currentId);
     }
 
@@ -23,7 +25,7 @@ import { currentId, projectsArray } from "./projectStorage";
     const taskList = document.getElementById("tasklist")
     taskList.innerHTML = ""
     const taskItem = document.createElement("div")
-    console.log(currentProject.tasks)
+    // console.log(currentProject.tasks)
     currentProject.tasks.forEach(task => {
         taskItem.innerHTML += `<div class="task-header">
         <p class="task-title">${task.title}</p>

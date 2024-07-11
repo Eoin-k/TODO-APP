@@ -3,9 +3,12 @@ import { Task } from "./task";
 import { renderProjectList,renderTasks } from "./rendering";
 import { getFromLocal,saveToLocal} from "./localStorage"
 export let projectsArray = getFromLocal("Projects")
-export let projectId = 1
+console.log(projectsArray)
+export let projectId = 0 ? projectsArray[projectsArray.length]  : (projectsArray[projectsArray.length-1].id + 1)
+console.log(projectId)
 export let currentId = 0
-//  console.log(projectsArray)
+console.log( "ME", projectsArray)
+// console.log("lol",projectsArray[projectsArray.length-1].id)
 
 const removeBtn = document.querySelectorAll(".remove-btn");
 
@@ -19,7 +22,7 @@ export function storeProjects() {
     projectsArray.push(newProject);
     console.log("Current Project Id = " + projectId);
     saveToLocal("Projects",projectsArray);
-     saveToLocal("ID",currentId)
+    saveToLocal("ID",currentId)
     renderProjectList(projectsArray)
     projectId++
     currentId = projectId
