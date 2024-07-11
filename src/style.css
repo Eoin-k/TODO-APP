@@ -1,0 +1,11 @@
+.project-tab{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.project-list-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}

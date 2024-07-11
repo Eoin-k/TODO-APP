@@ -4,40 +4,26 @@ import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
 export let projectsArray = getFromLocal("Projects");
 console.log(projectsArray);
-export let projectId = 0
-	? projectsArray[projectsArray.length]
-	: projectsArray[projectsArray.length - 1].id + 1;
+// export let projectId = null
+// 	? projectsArray[projectsArray.length]
+// 	: projectsArray[projectsArray.length - 1].id + 1;
 export let currentId = 0;
-
-export const addRemovalListeners = () => {
-	const removeBtn = document.querySelectorAll(".remove-btn");
-	removeBtn.forEach((button) => {
-		button.addEventListener("click", (e) => {
-			let target = button.closest(".task-div");
-			let getTaskTitle = target.querySelector(".task-title");
-			let taskText = getTaskTitle.textContent;
-			e.stopPropagation();
-			removeTask(taskText);
-		}),
-			{ capture: true };
-	});
-};
-
 const projectName = document.getElementById("project-name");
+
+
 export function addNewProject() {
 	let projectname = projectName.value;
 	if (
 		!projectsArray.find((storedProjects) => storedProjects.name === projectname)
 	) {
 		console.log(projectname + "LL");
-		let newProject = new Project(projectname, projectId);
+		let newProject = new Project(projectname);
 		projectsArray.push(newProject);
-		console.log("Current Project Id = " + projectId);
+		console.log("Current Project Id =" );
 		saveToLocal("Projects", projectsArray);
 		saveToLocal("ID", currentId);
 		renderProjectList(projectsArray);
-		projectId++;
-		currentId = projectId;
+	
 	} else {
 		alert("already Have a project of that Name");
 		return;
@@ -69,6 +55,34 @@ export const addTaskToProject = () => {
 	}
 };
 
+export const addTaskRemovalListeners = () => {
+	const removeBtn = document.querySelectorAll(".remove-btn");
+	removeBtn.forEach((button) => {
+		button.addEventListener("click", (e) => {
+			let target = button.closest(".task-div");
+			let getTaskTitle = target.querySelector(".task-title");
+			let taskText = getTaskTitle.textContent;
+			e.stopPropagation();
+			removeTask(taskText);
+		}),
+			{ capture: true };
+	});
+};
+
+export const addProjectRemovalListeners = () => {
+	const removeBtn = document.querySelectorAll(".delete-project");
+	removeBtn.forEach((button) => {
+		button.addEventListener("click", (e) => {
+			let target = e.target.id
+			console.log("MEOW ", target)
+			currentId = 0
+			e.stopPropagation();
+			removeProject(target)
+		}),
+			{ capture: true };
+	});
+};
+
 export const removeTask = (task) => {
 	let thisProject = projectsArray[currentId];
 	let findTask = thisProject.tasks.findIndex((tsk) => tsk.title === task);
@@ -76,3 +90,11 @@ export const removeTask = (task) => {
 	saveToLocal("Projects", projectsArray);
 	renderTasks(currentId);
 };
+
+export const removeProject = (buttonid) => {
+	projectsArray.splice(buttonid,1)
+	console.log(projectsArray.slice(buttonid,1))
+	saveToLocal("Projects", projectsArray);
+	renderProjectList(projectsArray)
+	console.log(projectsArray)
+}

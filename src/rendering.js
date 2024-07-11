@@ -2,22 +2,25 @@ import { saveToLocal } from "./localStorage";
 import {
 	currentId,
 	projectsArray,
-	addRemovalListeners,
+	addTaskRemovalListeners,
+	addProjectRemovalListeners
 } from "./projectStorage";
 
 export const renderProjectList = (projectsArray) => {
 	const list = document.querySelector(".project-list-wrapper");
 	list.innerHTML = "";
-	projectsArray.forEach((project) => {
-		list.innerHTML += `<li class="project-tab"><span id="${project.id}" class="project-item">${project.name}</span></li>`;
-	});
-	const projectTab = document.querySelectorAll(".project-tab");
+	for(let i=0; i<projectsArray.length; i++) {
+		list.innerHTML += `<li class="project-tab"><span id="${i}" class="project-item">${projectsArray[i].name}</span>
+		<div><button class="delete-project" id="${i}">Delete this project</button></div>
+		</li>`;
+	};
+	const projectTab = document.querySelectorAll(".project-item");
 	projectTab.forEach((item) => {
 		item.addEventListener(
 			"click",
 			(e) => {
 				currentId = e.target.id;
-				console.log(currentId);
+				console.log("Pwew",currentId);
 				renderTasks(currentId);
 				saveToLocal("ID", currentId);
 			},
@@ -49,5 +52,6 @@ export const renderTasks = (currentId) => {
         </div>
         </div>`;
 	});
-	addRemovalListeners();
+	addTaskRemovalListeners();
+	addProjectRemovalListeners()
 };
