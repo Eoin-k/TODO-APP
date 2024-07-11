@@ -1,9 +1,9 @@
-import {formatRelative, subDays} from "date-fns"
+import {formatRelative, format, subDays} from "date-fns"
 class Task {
     constructor(title,description,dueDate,priority,status,created){
         this.title = title,
         this.description = description,
-        this.dueDate = dueDate,
+        this.dueDate = format(dueDate,'dd MMMM yyyy')
         this.priority = priority,
         this.status = status
         this.created = new Date()

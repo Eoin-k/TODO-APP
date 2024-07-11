@@ -1,20 +1,33 @@
 import  {Project}  from "./projects";
 import { Task } from "./task";
 import { renderProjectList,renderTasks } from "./rendering";
-export let projectsArray = [];
+import { getFromLocal,saveToLocal} from "./localStorage"
+export let projectsArray = getFromLocal("Projects")
 export let projectId = 1
 export let currentId = 0
-const projectvalue = document.getElementById("project-name")
+//  console.log(projectsArray)
+
+const removeBtn = document.querySelectorAll(".remove-btn");
+
+
+const projectName = document.getElementById("project-name")
 export function storeProjects() {
-    let projectname = projectvalue.value
-    console.log(projectname)
+    let projectname = projectName.value
+    if(!projectsArray.find(storedProjects => storedProjects.name === projectname)){
+    console.log(projectname + "LL")
     let newProject = new Project(projectname,projectId)
     projectsArray.push(newProject);
-    console.log(projectsArray)
-    console.log("Current Project Id = " + projectId)
+    console.log("Current Project Id = " + projectId);
+    saveToLocal("Projects",projectsArray);
+     saveToLocal("ID",currentId)
     renderProjectList(projectsArray)
     projectId++
     currentId = projectId
+}
+else {
+    alert("already Have a project of that Name")
+    return;
+}
 }
 
 export const addTaskToProject = () => {
@@ -27,6 +40,12 @@ export const addTaskToProject = () => {
     let status = taskForm.status.value
     let newT = new Task(title,description,dueDate,priority,status)
     currentProject.tasks.push(newT);
-    renderTasks();
-    console.log(currentProject)
+    saveToLocal("Projects",projectsArray);
+    saveToLocal("ID",currentId)
+    console.log(newT);
+    renderTasks(currentId);
+}
+
+export const removeTask = (task) => {
+console.log(task + " lalalal")
 }
