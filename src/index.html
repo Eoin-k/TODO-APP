@@ -6,6 +6,23 @@
 		<title>Eoin's Todo App</title>
 	</head>
 	<body>
+		<section class="body-wrapper">
+			<div class="header">
+				<div class="header-text-wrapper">
+				<h1>Eoin's Todo App'</h1>
+				<h3>Keep track of all your tasks the easy way</h3>
+			</div>
+			<div id="currently-editing" class="currently-editing"></div>
+			</div>
+			<div class="sidebar">
+				<div class="project-list">
+					<ul class="project-list-wrapper"></ul>
+				</div>
+			</div>
+			<div class="projects-and-tasks-wrapper">
+				<div id="tasklist" class="tasklist"></div>
+			</div>
+		</section>
 		<form id="project-form" action="" method="">
 			<input type="text" id="project-name" />
 			<button id="submit-btn" type="button">Add Project</button>
@@ -24,11 +41,6 @@
 			></textarea>
 			<button id="new-task-btn" type="button">Add new task</button>
 		</form>
-		<div class="projects-and-tasks-wrapper">
-			<div class="project-list">
-				<ul class="project-list-wrapper"></ul>
-			</div>
-			<div id="tasklist" class="tasklist"></div>
-		</div>
+		
 	</body>
 </html>

@@ -52,6 +52,9 @@ export const renderTasks = (currentId) => {
         </div>
         </div>`;
 	});
+	const editingWrapper = document.getElementById("currently-editing")
+	editingWrapper.innerHTML = `<h3 class=currently-editing-project-name>Currently Editing:</h3>
+	<p>${currentProject.name}</p>`
 	addTaskRemovalListeners();
 	addProjectRemovalListeners()
 };
