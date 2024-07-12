@@ -5,7 +5,7 @@ import {
 	addTaskRemovalListeners,
 	addProjectRemovalListeners
 } from "./projectStorage";
-
+import { showTaskDialog,showProjectDialog } from "./forms";
 export const renderProjectList = (projectsArray) => {
 	const list = document.querySelector(".project-list-wrapper");
 	list.innerHTML = "";
@@ -54,7 +54,15 @@ export const renderTasks = (currentId) => {
 	});
 	const editingWrapper = document.getElementById("currently-editing")
 	editingWrapper.innerHTML = `<h3 class=currently-editing-project-name>Currently Editing:</h3>
-	<p>${currentProject.name}</p>`
+	<p>${currentProject.name}</p>
+	<button class="new-task-btn" id="new-task">New Task +</button>`
+
+	// task button dialog 
+	const newTaskBtn = document.getElementById("new-task")
+	newTaskBtn.addEventListener("click",showTaskDialog)
+	// new project dialog
+	const newProjectBtn = document.getElementById("add-new-project")
+	newProjectBtn.addEventListener("click", showProjectDialog)
 	addTaskRemovalListeners();
 	addProjectRemovalListeners()
 };

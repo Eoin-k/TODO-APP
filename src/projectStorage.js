@@ -1,17 +1,15 @@
 import { Project } from "./projects";
 import { Task } from "./task";
+import { closeTaskDialog } from "./forms";
 import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
 export let projectsArray = getFromLocal("Projects");
 console.log(projectsArray);
-// export let projectId = null
-// 	? projectsArray[projectsArray.length]
-// 	: projectsArray[projectsArray.length - 1].id + 1;
 export let currentId = 0;
-const projectName = document.getElementById("project-name");
 
 
 export function addNewProject() {
+	const projectName = document.getElementById("project-name");
 	let projectname = projectName.value;
 	if (
 		!projectsArray.find((storedProjects) => storedProjects.name === projectname)
@@ -48,6 +46,7 @@ export const addTaskToProject = () => {
 		saveToLocal("ID", currentId);
 		console.log(newT);
 		renderTasks(currentId);
+		closeTaskDialog()
 		return;
 	} else {
 		alert("Task with same name already exists");

@@ -15,6 +15,7 @@
 			<div id="currently-editing" class="currently-editing"></div>
 			</div>
 			<div class="sidebar">
+				<div><button id="add-new-project" class="btn-primary">Add New Project</button></div>
 				<div class="project-list">
 					<ul class="project-list-wrapper"></ul>
 				</div>
@@ -23,24 +24,13 @@
 				<div id="tasklist" class="tasklist"></div>
 			</div>
 		</section>
-		<form id="project-form" action="" method="">
-			<input type="text" id="project-name" />
-			<button id="submit-btn" type="button">Add Project</button>
 		</form>
 
-		<form id="task-form" action="" method="">
-			<input type="text" name="title" id="task-title" />
-			<input name="taskpriority" type="text" id="task-priority" />
-			<input name="duedate" type="date" id="due-date" />
-			<input name="status" type="text" id="status" />
-			<textarea
-				name="description"
-				cols="14"
-				rows="3"
-				id="task-description"
-			></textarea>
-			<button id="new-task-btn" type="button">Add new task</button>
-		</form>
 		
+		<!--Dialogs-->
+		<dialog id="task-dialog">
+		</dialog>
+		<dialog id="new-project-dialog">
+		</dialog>
 	</body>
 </html>
