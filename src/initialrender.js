@@ -1,6 +1,6 @@
 import { projectsArray,addRemovalListeners } from "./projectStorage";
 import { Project } from "./projects";
-import { renderProjectList} from "./rendering";
+import { removeActiveClassOnTabs, renderProjectList} from "./rendering";
 import { Task } from "./task";
 
 export const initialRender = () => {
@@ -10,9 +10,10 @@ export const initialRender = () => {
         pro.addTaskToProject(nt);
         projectsArray.push(pro)
         renderProjectList(projectsArray)
-
+        
         return
     } else {
         renderProjectList(projectsArray)
+        
 }
 }

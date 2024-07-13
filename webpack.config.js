@@ -7,9 +7,9 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    // assetModuleFilename: './images/[hash][ext][query]',
   },
-  devtool: 'inline-source-map',
+  
   module: {
     rules: [
       {
@@ -33,6 +33,7 @@ module.exports = {
         template: './src/index.html'
     })
   ],
+  // devtool: 'inline-source-map',
 };
 
   

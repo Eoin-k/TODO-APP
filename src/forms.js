@@ -2,6 +2,7 @@ import { addTaskToProject, addNewProject } from "./projectStorage";
 const taskDialog = document.getElementById("task-dialog")
 const projectDialog = document.getElementById("new-project-dialog")
 
+
 // Showing & hiding of all dialogs
   export const showTaskDialog = () => {
     taskDialog.showModal();
@@ -14,7 +15,7 @@ export const showProjectDialog = () => {
     projectDialog.showModal();
     newProjectForm();
 }
-const closeProjectDialog = () => {
+export const closeProjectDialog = () => {
     projectDialog.close()
 }
 
@@ -25,10 +26,11 @@ const newProjectForm = () => {
             <label for"new-project">Enter your new project name</label>
 			<input name="new-project" type="text" id="project-name" />
             </div>
-			<button class="btn-primary" id="submit-btn" type="button">Add Project</button>`
+			<button class="btn-primary" id="submit-btn" type="button">Add Project</button>
+			<button style="background-color: red; color: white" onclick="closeProjectDialog">Close</button>`
             const submitbtn = document.getElementById("submit-btn");
             submitbtn.addEventListener("click", addNewProject);
-            closeProjectDialog();
+            
 }
 
  const newTaskForm = () => {

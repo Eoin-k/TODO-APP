@@ -1,6 +1,6 @@
 import { Project } from "./projects";
 import { Task } from "./task";
-import { closeTaskDialog } from "./forms";
+import { closeTaskDialog, closeProjectDialog } from "./forms";
 import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
 export let projectsArray = getFromLocal("Projects");
@@ -21,6 +21,7 @@ export function addNewProject() {
 		saveToLocal("Projects", projectsArray);
 		saveToLocal("ID", currentId);
 		renderProjectList(projectsArray);
+		closeProjectDialog();
 	
 	} else {
 		alert("already Have a project of that Name");
@@ -91,9 +92,15 @@ export const removeTask = (task) => {
 };
 
 export const removeProject = (buttonid) => {
+	
+	if(confirm("Are you sure you want to delete this project?")){
 	projectsArray.splice(buttonid,1)
 	console.log(projectsArray.slice(buttonid,1))
 	saveToLocal("Projects", projectsArray);
 	renderProjectList(projectsArray)
 	console.log(projectsArray)
+	}
+	else {
+		return
+	}
 }
