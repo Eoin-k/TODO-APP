@@ -3,9 +3,12 @@ import {
 	currentId,
 	projectsArray,
 	addTaskRemovalListeners,
-	addProjectRemovalListeners
+	addProjectRemovalListeners,
+	addTaskEditListeners
 } from "./projectStorage";
 import trash from './images/cil--trash.svg'
+import edit from './images/mage--edit.svg'
+import remove from './images/streamline--delete-1-solid.svg'
 import { showTaskDialog,showProjectDialog } from "./forms";
 
 
@@ -47,18 +50,22 @@ export const renderTasks = (currentId) => {
 		taskList.innerHTML += `<div id="${count}" class="task-div">
         <div class="task-header">
         <p class="task-title">${task.title}</p>
+		<div class="button-wrapper">
+        <button class="remove-task-btn"><img class="edit-img" src="${remove}"></button>
+		<button id=${count} class="edit-task-btn"><img class="edit-img" src="${edit}"></button>
+        </div>
         </div>
         <div class="task-body">
-        <p>${task.description}</p>
-        <p>${task.dueDate}</p>
-        <select> 
-        <option selected>${task.priority}</option>
-        </select>
+		<p class="task-duedate">Finish by: ${task.dueDate}</p>
+        <p class="task-priority"> Priority: ${task.priority}</p>
         </div>
-        <div class="button-wrapper">
-        <button class="btn-primary remove-btn">Remove</button>
+		<p class="task-status">Status: ${task.status}</p>
+		<div class="description-wrapper">
+		<p class="description-label">Description:</p>
+        <p class="task-description">${task.description}</p>
+		</div>
         </div>
-        </div>`;
+		`;
 		count++
 	});
 	const editingWrapper = document.getElementById("currently-editing")
@@ -73,6 +80,7 @@ export const renderTasks = (currentId) => {
 	const newProjectBtn = document.getElementById("add-new-project")
 	newProjectBtn.addEventListener("click", showProjectDialog)
 	addTaskRemovalListeners();
+	addTaskEditListeners()
 	addProjectRemovalListeners()
 };
 

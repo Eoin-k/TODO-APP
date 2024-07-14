@@ -1,8 +1,9 @@
 import { Project } from "./projects";
 import { Task } from "./task";
-import { closeTaskDialog, closeProjectDialog } from "./forms";
+import { closeTaskDialog, closeProjectDialog, closeTaskEditDialog, showTaskEditDialog} from "./forms";
 import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
+import { format } from "date-fns";
 export let projectsArray = getFromLocal("Projects");
 console.log(projectsArray);
 export let currentId = getFromLocal("ID") 
@@ -69,16 +70,38 @@ export const addTaskRemovalListeners = () => {
 	});
 };
 
-export const addProjectRemovalListeners = () => {
-	const removeBtn = document.querySelectorAll(".project-delete-button");
-	removeBtn.forEach((button) => {
+export const addTaskEditListeners = () => {
+	const editBtn = document.querySelectorAll(".edit-task-btn");
+	editBtn.forEach((button) => {
 		button.addEventListener("click", (e) => {
-			e.stopPropagation();
-			removeProject(e)
+			let target = button.closest(".task-div");
+			let taskid = target.id
+			let title = target.querySelector(".task-title").textContent;
+			let description = target.querySelector(".task-description").textContent;
+			let priority = target.querySelector(".task-priority").value;
+			let dueDate = target.querySelector(".task-duedate").textContent;
+			dueDate = format(dueDate, "yyyy-MM-dd")
+			let status = target.querySelector(".task-status").textContent;
+			showTaskEditDialog(title,description,priority,dueDate,status,taskid)
 		}),
 			{ capture: true };
 	});
 };
+
+export const addProjectRemovalListeners = () => {
+	const removeBtn = document.querySelectorAll(".project-delete-button");
+	removeBtn.forEach((button) => {
+		button.addEventListener("click", (e) => {
+			removeProject(e)
+			e.stopPropagation();
+		}),
+			{ capture: true };
+	});
+};
+
+export const updateTask = (taskid) => {
+	
+}
 
 export const removeTask = (task) => {
 	let thisProject = projectsArray[currentId];
