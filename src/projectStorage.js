@@ -57,7 +57,7 @@ export const addTaskToProject = () => {
 };
 
 export const addTaskRemovalListeners = () => {
-	const removeBtn = document.querySelectorAll(".remove-btn");
+	const removeBtn = document.querySelectorAll(".remove-task-btn");
 	removeBtn.forEach((button) => {
 		button.addEventListener("click", (e) => {
 			let target = button.closest(".task-div");
@@ -104,11 +104,16 @@ export const updateTask = (taskid) => {
 }
 
 export const removeTask = (task) => {
+	if(confirm("Are you sure you want to delete this task?")){
 	let thisProject = projectsArray[currentId];
 	let findTask = thisProject.tasks.findIndex((tsk) => tsk.title === task);
 	thisProject.tasks.splice(findTask, 1);
 	saveToLocal("Projects", projectsArray);
 	renderTasks(currentId);
+	}
+	else {
+		return
+	}
 };
 
 export const removeProject = (e) => {

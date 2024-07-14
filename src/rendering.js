@@ -69,9 +69,8 @@ export const renderTasks = (currentId) => {
 		count++
 	});
 	const editingWrapper = document.getElementById("currently-editing")
-	editingWrapper.innerHTML = `<h3 class=currently-editing-project-name>Currently Editing:</h3>
-	<p>${currentProject.name}</p>
-	<button class="btn-primary" id="new-task">New Task +</button>`
+	editingWrapper.textContent= currentProject.name
+	
 
 	// task button dialog 
 	const newTaskBtn = document.getElementById("new-task")
