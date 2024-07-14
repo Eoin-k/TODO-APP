@@ -5,7 +5,7 @@ import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
 export let projectsArray = getFromLocal("Projects");
 console.log(projectsArray);
-export let currentId = 0;
+export let currentId = getFromLocal("ID") 
 
 
 export function addNewProject() {
@@ -70,14 +70,11 @@ export const addTaskRemovalListeners = () => {
 };
 
 export const addProjectRemovalListeners = () => {
-	const removeBtn = document.querySelectorAll(".delete-project");
+	const removeBtn = document.querySelectorAll(".project-delete-button");
 	removeBtn.forEach((button) => {
 		button.addEventListener("click", (e) => {
-			let target = e.target.id
-			console.log("MEOW ", target)
-			currentId = 0
 			e.stopPropagation();
-			removeProject(target)
+			removeProject(e)
 		}),
 			{ capture: true };
 	});
@@ -91,8 +88,8 @@ export const removeTask = (task) => {
 	renderTasks(currentId);
 };
 
-export const removeProject = (buttonid) => {
-	
+export const removeProject = (e) => {
+	let buttonid = e.target.id
 	if(confirm("Are you sure you want to delete this project?")){
 	projectsArray.splice(buttonid,1)
 	console.log(projectsArray.slice(buttonid,1))

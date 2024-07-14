@@ -10,11 +10,12 @@ import { showTaskDialog,showProjectDialog } from "./forms";
 
 
 export const renderProjectList = (projectsArray) => {
+	console.log("BLEH,", currentId)
 	const list = document.querySelector(".project-list-wrapper");
 	list.innerHTML = "";
 	for(let i=0; i<projectsArray.length; i++) {
-		list.innerHTML += `<li class="project-tab"><span id="${i}" class="project-item">${projectsArray[i].name}</span>
-		<div class="delete-project-wrapper"><button class="project-delete-button" id="${i}"><img src="${trash}"</button></div>
+		list.innerHTML += `<li id="${i}" class="project-tab"><span id="${i}" class="project-item">${projectsArray[i].name}</span>
+		<div class="delete-project-wrapper"><button class="project-delete-button"><img id="${i}" src="${trash}"</button></div>
 		</li>`;
 	};
 	const projectTab = document.querySelectorAll(".project-item");
@@ -33,14 +34,17 @@ export const renderProjectList = (projectsArray) => {
 		);
 	});
 	renderTasks(currentId)
+	const tabWrapper = document.querySelectorAll(".project-tab")
+	tabWrapper[currentId].classList.add("active-project-tab")
 };
 
 export const renderTasks = (currentId) => {
 	const currentProject = projectsArray[currentId];
 	const taskList = document.getElementById("tasklist");
 	taskList.innerHTML = "";
+	let count = 0
 	currentProject.tasks.forEach((task) => {
-		taskList.innerHTML += `<div class="task-div">
+		taskList.innerHTML += `<div id="${count}" class="task-div">
         <div class="task-header">
         <p class="task-title">${task.title}</p>
         </div>
@@ -55,6 +59,7 @@ export const renderTasks = (currentId) => {
         <button class="btn-primary remove-btn">Remove</button>
         </div>
         </div>`;
+		count++
 	});
 	const editingWrapper = document.getElementById("currently-editing")
 	editingWrapper.innerHTML = `<h3 class=currently-editing-project-name>Currently Editing:</h3>

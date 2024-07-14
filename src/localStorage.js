@@ -5,9 +5,12 @@ export const saveToLocal = (key, value) => {
 
 export const getFromLocal = (key) => {
 	const storedValue = localStorage.getItem(key);
+	if (storedValue === null && key === "ID"){
+		return 0
+	}
 	if (storedValue === null) {
 		return [];
-	}
+	} else{
 	try {
 		const parsedValue = JSON.parse(storedValue);
 		return parsedValue;
@@ -15,4 +18,5 @@ export const getFromLocal = (key) => {
 		console.error("Error Parsing JSON", error);
 		return [];
 	}
+}
 };
