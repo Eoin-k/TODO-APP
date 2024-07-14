@@ -18,7 +18,6 @@ export function addNewProject() {
 		console.log(projectname + "LL");
 		let newProject = new Project(projectname);
 		projectsArray.push(newProject);
-		console.log("Current Project Id =" );
 		saveToLocal("Projects", projectsArray);
 		saveToLocal("ID", currentId);
 		renderProjectList(projectsArray);
@@ -46,7 +45,6 @@ export const addTaskToProject = () => {
 		currentProject.tasks.push(newT);
 		saveToLocal("Projects", projectsArray);
 		saveToLocal("ID", currentId);
-		console.log(newT);
 		renderTasks(currentId);
 		closeTaskDialog()
 		return;
@@ -99,10 +97,6 @@ export const addProjectRemovalListeners = () => {
 	});
 };
 
-export const updateTask = (taskid) => {
-	
-}
-
 export const removeTask = (task) => {
 	if(confirm("Are you sure you want to delete this task?")){
 	let thisProject = projectsArray[currentId];
@@ -120,10 +114,8 @@ export const removeProject = (e) => {
 	let buttonid = e.target.id
 	if(confirm("Are you sure you want to delete this project?")){
 	projectsArray.splice(buttonid,1)
-	console.log(projectsArray.slice(buttonid,1))
 	saveToLocal("Projects", projectsArray);
 	renderProjectList(projectsArray)
-	console.log(projectsArray)
 	}
 	else {
 		return

@@ -1,7 +1,6 @@
-import { saveToLocal } from "./localStorage";
-import { projectsArray,addRemovalListeners, currentId } from "./projectStorage";
+import { projectsArray, currentId } from "./projectStorage";
 import { Project } from "./projects";
-import { removeActiveClassOnTabs, renderProjectList} from "./rendering";
+import { renderProjectList} from "./rendering";
 import { Task } from "./task";
 
 export const initialRender = () => {

@@ -29,7 +29,6 @@ export const renderProjectList = (projectsArray) => {
 				removeActiveClassOnTabs()
 				item.parentElement.classList.add("active-project-tab")
 				currentId = e.target.id;
-				console.log("Pwew",currentId);
 				renderTasks(currentId);
 				saveToLocal("ID", currentId);
 			},
