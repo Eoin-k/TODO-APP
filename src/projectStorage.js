@@ -1,5 +1,6 @@
 import { Project } from "./projects";
 import { Task } from "./task";
+import { initialRender } from "./initialrender";
 import { closeTaskDialog, closeProjectDialog, closeTaskEditDialog, showTaskEditDialog} from "./forms";
 import { renderProjectList, renderTasks } from "./rendering";
 import { getFromLocal, saveToLocal } from "./localStorage";
@@ -116,6 +117,9 @@ export const removeProject = (e) => {
 	projectsArray.splice(buttonid,1)
 	saveToLocal("Projects", projectsArray);
 	renderProjectList(projectsArray)
+	if (projectsArray.length === 0){
+		initialRender()
+	}
 	}
 	else {
 		return
